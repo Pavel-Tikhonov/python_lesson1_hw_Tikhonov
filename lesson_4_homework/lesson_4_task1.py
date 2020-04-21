@@ -13,6 +13,25 @@ def profit_count(production, rate, premium):
     :param rate: float - ставка в часах
     :return premium: float - премия
     """
+
+    try:
+        production = float(production)
+    except ValueError as e:
+        print(f'Возникла ошибка с первым аргументом: {e}\nВходные данные должны представлять собой числа.\n'
+              f'Вы ввели: {production}')
+        return None
+    try:
+        rate = float(rate)
+    except ValueError as e:
+        print(f'Возникла ошибка со вторым аргументом: {e}\nВходные данные должны представлять собой числа.\n'
+              f'Вы ввели: {rate}')
+        return None
+    try:
+        premium = float(premium)
+    except ValueError as e:
+        print(f'Возникла ошибка с третим аргументом: {e}\nВходные данные должны представлять собой числа.\n'
+              f'Вы ввели: {premium}')
+        return None
     profit = production * rate + premium
     return profit
 
@@ -22,8 +41,12 @@ rate = argv[2]
 premium = argv[3]
 
 profit = profit_count(production, rate, premium)
-print(f'Были введены следующие данные:\n'
-      f'Выработка: {production} ч.\n'
-      f'Ставка: {rate} ч.\n'
-      f'Премия: {premium} гривен\n'
-      f'Имеем заработок в размере {production}*{rate} + {premium} = {profit} гривен')
+
+if profit != None:
+    print(f'Были введены следующие данные:\n'
+          f'Выработка: {production} ч.\n'
+          f'Ставка: {rate} ч.\n'
+          f'Премия: {premium} гривен\n'
+          f'Имеем заработок в размере {production}*{rate} + {premium} = {profit} гривен')
+else:
+    print('Из-за наличия одной или нескольких ошибок при вводе входных данных работа скрипта не была закончена.')
